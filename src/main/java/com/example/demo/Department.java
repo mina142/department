@@ -14,8 +14,9 @@ public class Department {
     private String name;
 
     @OneToMany(mappedBy = "department",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-
     private Collection<User> users;
+
+
 
     public long getId() {
         return id;

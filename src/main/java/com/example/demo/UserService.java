@@ -31,6 +31,7 @@ public class UserService {
         return userRepository.findByUserName(username);
     }
     public Long countByUsername(String username){return  userRepository.countByUserName(username);}
+
     public void saveUser(User user){
         user.setRoles(Arrays.asList(roleRepository.findByRole("USER")));
         user.setEnabled(true);
@@ -41,5 +42,15 @@ public class UserService {
         user.setEnabled(true);
         userRepository.save(user);
     }
+  /*  public User getUser(){
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        String currentUserName = authentication.getName();
+
+        return userRepository.findByUsername(currentUserName);
+
+    }*/
+
 
 }

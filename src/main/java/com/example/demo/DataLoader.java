@@ -16,6 +16,10 @@ public class DataLoader implements CommandLineRunner {
     RoleRepository roleRepository;
 
     @Autowired
+            //if we want to departmnet to show in our secure page we need to creat one in dataloader
+    DepartmentRepository departmentRepository;
+
+    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     @Override
@@ -24,13 +28,18 @@ public class DataLoader implements CommandLineRunner {
         roleRepository.save(new Role("ADMIN"));
         Role adminRole = roleRepository.findByRole("ADMIN");
         Role userRole = roleRepository.findByRole("USER");
+        Department dpt = new Department();
+        dpt.setName("cyber");
+        departmentRepository.save(dpt);
 
 
-        User user = new User("jim@jim.com" , "password", "jim", "jimmerson" , true, "jim");
+
+
+        User user = new User("jim@jim.com" , "password", "jim", "jimmerson" , true, "jim",dpt);
         user.setRoles(Arrays.asList(userRole));
         userRepository.save(user);
 
-        user=new User("admin@admin.com", "password", "Admin", "User",true, "admin");
+        user=new User("admin@admin.com", "password", "Admin", "User",true, "admin",dpt);
         user.setRoles(Arrays.asList(adminRole));
         userRepository.save(user);
     }

@@ -6,11 +6,11 @@
     <title>Registration</title>
 </head>
 <body>
-
+<div th:replace="base :: navlinks"></div>
 <div class="card">
     <div class="card-body">
         <h4>New User registration</h4>
-        <form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post" >
+        <form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post" enctype="multipart/form-data" >
             <div class="form-group">
                 <label>First Name: </label><mark><strong>
     <span th:if="${#fields.hasErrors('firstName')}"
@@ -46,6 +46,11 @@
                 <option th:each="department : ${departments}" th:value="${department.id}" th:text="${department.name}"></option>
 
             </select><br>
+            Image : <input type="file" name="file"><br/><br/>
+            <div th:if="${user.userPicture} !=null">
+                <img th:src="${user.userPicture}">
+            </div>
+            <br>
 
             <button type="submit" class="btn btn-primary">Submit</button>
 

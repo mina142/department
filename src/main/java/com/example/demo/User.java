@@ -31,6 +31,8 @@ public class User {
     @Column(name = "username")
     private String userName;
 
+    private String userPicture;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -38,18 +40,19 @@ public class User {
 
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "director_id")
+    @JoinColumn(name = "department_id")
     private Department department;
 
     public User(){}
 
-    public User(String email, String password, String firstName, String lastName,boolean enabled,String userName ){
+    public User(String email, String password, String firstName, String lastName,boolean enabled,String userName , Department department){
         this.setEmail(email);
         this.setPassword(password);
         this.setFirstName(firstName);
         this.setLastName(lastName);
         this.setEnabled(enabled);
         this.setUserName(userName);
+        this.setDepartment(department);
     }
 
     public long getId() {
@@ -124,6 +127,14 @@ public class User {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public String getUserPicture() {
+        return userPicture;
+    }
+
+    public void setUserPicture(String userPicture) {
+        this.userPicture = userPicture;
     }
 }
 
